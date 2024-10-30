@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"name": "rumah_dan_villa",
+			"path": "."
+		},
+		{
+			"name": "scss",
+			"path": "../../INPELEMTASI DAN PERCOBAAN/Template testing/Rumah & Villa/scss"
+		},
+		{
+			"name": "css",
+			"path": "../../INPELEMTASI DAN PERCOBAAN/Template testing/Rumah & Villa/css"
+		},
+		{
+			"name": "img",
+			"path": "../../INPELEMTASI DAN PERCOBAAN/Template testing/Rumah & Villa/img"
+		},
+		{
+			"name": "js",
+			"path": "../../INPELEMTASI DAN PERCOBAAN/Template testing/Rumah & Villa/js"
+		},
+		{
+			"name": "lib",
+			"path": "../../INPELEMTASI DAN PERCOBAAN/Template testing/Rumah & Villa/lib"
+		}
+	],
+	"settings": {}
+}
