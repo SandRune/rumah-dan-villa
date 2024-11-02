@@ -86,53 +86,101 @@
         </div>
 
         <div class="gallery-container">
+            <!-- Setiap elemen galeri -->
             <div class="gallery-item">
-                <img src="public/img/exterior.jpg" alt="Gambar 1">
-                <div class="gallery-text">keren <br style="font-weight: 50;">sold out</div>
+                <a href="sesuatu">
+                <img src="public/img/batu.jpg" alt="Gambar 1">
+                <div class="gallery-text">
+                    <!-- Baris pertama dengan nama hotel dan rating -->
+                    <div class="hotel-info">
+                        <span class="hotel-name">Villa batu</span>
+                        <span class="hotel-rating">⭐4.7</span>
+                    </div>
+                    <!-- Deskripsi lainnya rata kiri -->
+                    <p>tbf ini rumah orang mau dipake buat usaha villa</p>
+                </div>
+                </a>
             </div>
+        
             <div class="gallery-item">
-                <img src="public/img/nicebed1.jpg" alt="Gambar 2">
-                <div class="gallery-text">Deskripsi Gambar 2</div>
+                <img src="public/img/villa batu.jpg" alt="Gambar 2">
+                <div class="gallery-text">
+                    <div class="hotel-info">
+                        <span class="hotel-name">Villa mana saja</span>
+                        <span class="hotel-rating">⭐2.5</span>
+                    </div>
+                    <p>kamar mandi nya kotor bgt bjirrr</p>
+                </div>
             </div>
+        
             <div class="gallery-item">
-                <img src="public/img/batu.jpg" alt="Gambar 3">
-                <div class="gallery-text">Deskripsi Gambar 3</div>
+                <img src="public/img/nicebed1.jpg" alt="Gambar 3">
+                <div class="gallery-text">
+                    <div class="hotel-info">
+                        <span class="hotel-name">Hotel visa</span>
+                        <span class="hotel-rating">⭐4.1</span>
+                    </div>
+                    <p>Beneran hotel</p>
+                </div>
             </div>
+        
             <div class="gallery-item">
-                <img src="public/img/villa batu.jpg" alt="Gambar 4">
-                <div class="gallery-text">Deskripsi Gambar 4</div>
+                <img src="public/img/exterior.jpg" alt="Gambar 4">
+                <div class="gallery-text">
+                    <div class="hotel-info">
+                        <span class="hotel-name">Villa dingin</span>
+                        <span class="hotel-rating">⭐5.0</span>
+                    </div>
+                    <p>beneran dingin soalnya kamu tidur di exterior nya</p>
+                </div>
             </div>
         </div>
         <style>
             .gallery-container {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
-                max-width: 1200px;
-                margin: 20px auto;
-                padding: 0 20px;
-            }
-    
-            .gallery-item {
-                position: relative;
-                overflow: hidden;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            }
-    
-            .gallery-item img {
-                width: 100%;
-                height: 200px;
-                display: block;
-                display: block;
-            }
-    
-            .gallery-text {
-                padding: 15px;
-                text-align: center;
-                font-weight: bold;
-                background-color: #fff;
-            }
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px; 
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-text {
+            padding: 15px;
+            background-color: #fff;
+            font-weight: bold;
+            text-align: left; 
+        }
+
+        .hotel-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+
+        .hotel-name {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .hotel-rating {
+            font-size: 0.9rem;
+            color: #3e3e3e;
+        }
         </style>
         <!-- About End -->
 
