@@ -28,25 +28,58 @@ body {
     box-shadow: 0px 0px 10px 0px #000000;
     border-radius: 10px;
 }
-input[type="text"], input[type="password"], input[type="email"] {
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Keeping your original input types */
+input[type="email1"], 
+input[type="username1"], 
+input[type="password"] {
     width: 100%;
     padding: 10px;
-                                                margin: 10px 0;
-                                                border: 1px solid #ccc;
-                                                border-radius: 5px;
-                                            }
-                                            button {
-                                                background-color: #4CAF50;
-                                                color: white;
-                                                padding: 10px;
-                                                width: 100%;
-                                                border: none;
-                                                cursor: pointer;
-                                                border-radius: 5px;
-                                            }
-                                            button:hover {
-                                                background-color: #45a049;
-                                            }
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 10px 0; /* Added margin here */
+}
+
+button[type="submit1"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button[type="submit1"]:hover {
+    background-color: #45a049;
+}
+
+/* Removing redundancy */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
  
 
 /*** Spinner ***/
