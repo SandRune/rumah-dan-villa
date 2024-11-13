@@ -24,3 +24,29 @@ export const auth = getAuth();
 export const firestore = getFirestore();
 
 */
+/*
+// Using the Firebase Admin SDK
+const admin = require('firebase-admin');
+admin.initializeApp({
+  credential: admin.credential.cert('path/to/serviceAccountKey.json')
+});
+
+const auth = admin.auth();
+
+// Create a new user with the "admin" claim
+auth.createUser({
+  email: 'newadmin@example.com',
+  password: 'password123',
+  displayName: 'New Admin User',
+  disabled: false,
+  customClaims: {
+    admin: true
+  }
+})
+.then(userRecord => {
+  console.log('Successfully created new user:', userRecord.uid);
+})
+.catch(error => {
+  console.log('Error creating new user:', error);
+});
+*/
