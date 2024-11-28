@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Batu Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reservation-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .reservation-details {
+            flex: 1;
+            max-width: 60%;
+        }
+
+        .google-map {
+            flex: 1;
+            max-width: 40%;
+            height: 400px;
+        }
+
+        .google-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @media (max-width: 768px) {
+            .reservation-container {
+                flex-direction: column;
+            }
+
+            .reservation-details, .google-map {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Villa Batu Reservation</h1>
+        <div class="reservation-container">
+            <!-- Reservation Details -->
+            <div class="reservation-details">
+                <div class="gallery-detail">
+                    <img src="public/img/batu.jpg" alt="Villa Batu" style="width: 100%; border-radius: 10px;">
+                </div>
+                <div class="details">
+                    <p><strong>Description:</strong> tbf ini rumah orang mau dipake buat usaha villa</p>
+                    <p><strong>Rating:</strong> ⭐4.7</p>
+                    <p><strong>Price:</strong> Rp975,600 / night</p>
+                </div>
+                <button class="btn btn-primary">Reserve</button>
+            </div>
+
+            <!-- Google Maps -->
+            <div class="google-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1907.5983767248376!2d112.52373614318837!3d-7.877544032868579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7887333731fe9f%3A0xea007d403123935!2sBatu%2C%20Batu%20City%2C%20East%20Java!5e1!3m2!1sen!2sid!4v1732794269872!5m2!1sen!2sid" 
+                width="600" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

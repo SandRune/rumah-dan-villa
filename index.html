@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="catalog.html" class="nav-item nav-link">Stays</a>
+                    <a href="stays.html" class="nav-item nav-link">Stays</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Rent</a>
                         <div class="dropdown-menu rounded-0 m-0">
@@ -101,55 +101,52 @@
         <!-- Carousel End -->
 
 <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-1000">
-                            <div class="col-md-4">
-                                <label for="HomeType">Location</label>
-                                <input type="text" class="form-control border-0" placeholder="Location" />
-                            </div>
-                            <div class="col-md-4">
-                                <label for="HomeType">Home Type</label>
-                                <select class="form-select border-0">
-                                    <option selected>Home Type</option>
-                                    <option value="1">Rooms</option>
-                                    <option value="2">Full House</option>
-                                    <option value="3">Villa</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="numberChoice">How Many Guess</label>
-                                    <input type="number" class="form-control" id="numberChoice" name="numberChoice" min="1" max="15">
-                                </div>
-                            </div>
-                            <!-- Date In -->
-                            <div class="col-md-4a">
-                                    <label for="dateIn">Date In</label>
-                                    <input type="date" class="form-control" id="dateIn" name="dateIn">
-                            </div>
-                            <!-- Date Out -->
-                            <div class="col-md-4a">
-                                <label for="dateOut">Date Out</label>
-                                <input type="date" class="form-control" id="dateOut" name="dateOut">
-                            </div>
-                            <!--seacrh-->
-                            <div class="col-md-5">
-                                <label for="Test"> </label>
-                                <button class="btn btn-dark border-0 w-100">Search</button>
-                            </div>
-                            <!--search end-->
-                            <!--<div class="col-md-2">
-                                <map name=""></map>
-                            </div>
-                            -->
-                        </div>
-                    </div>
-                </div>
+<div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container">
+        <div class="row g-2">
+            <!-- Location -->
+            <div class="col-md-4">
+                <label for="location" style="color: black; font-weight: bold;">Location</label>
+                <input type="text" class="form-control border-0" id="location" placeholder="Location" style="margin-top: 5px; border-radius: 0;" />
+            </div>
+            <!-- Home Type -->
+            <div class="col-md-4">
+                <label for="homeType">Home Type</label>
+                <select class="form-select border-0" id="homeType" style="margin-top: 5px; border-radius: 0;">
+                    <option selected>Home Type</option>
+                    <option value="1">Rooms</option>
+                    <option value="2">Full House</option>
+                    <option value="3">Villa</option>
+                </select>
+            </div>
+            <!-- How Many Guests -->
+            <div class="col-md-4">
+                <label for="numberChoice">How Many Guests</label>
+                <input type="number" class="form-control border-0" id="numberChoice" name="numberChoice" min="1" max="15" style="margin-top: 5px; border-radius: 0;" />
             </div>
         </div>
+        <div class="row g-2 mt-3">
+            <!-- Date In -->
+            <div class="col-md-6">
+                <label for="dateIn">Date In</label>
+                <input type="date" class="form-control border-0" id="dateIn" name="dateIn" style="margin-top: 5px; border-radius: 0;" />
+            </div>
+            <!-- Date Out -->
+            <div class="col-md-6">
+                <label for="dateOut">Date Out</label>
+                <input type="date" class="form-control border-0" id="dateOut" name="dateOut" style="margin-top: 5px; border-radius: 0;" />
+            </div>
+        </div>
+        <div class="row g-2 mt-3">
+            <!-- Search Button -->
+            <div class="col-md-12">
+                <button class="btn btn-dark border-0 w-100" style="border-radius: 0;">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <!-- Search End -->
 
         
@@ -159,65 +156,74 @@
             <div class="container">
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
                 <div class="row g-4">
+                    <!-- Luxury Villas -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-house text-primary mb-4"></i>
-                            <h6 class="mb-3">Marketing</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-house-user text-primary mb-4"></i>
+                            <h6 class="mb-3">Luxury Villas</h6>
+                            <p class="mb-0">45 Options</p>
                         </a>
                     </div>
+                    <!-- Budget Stays -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                            <h6 class="mb-3">Customer Service</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-money-bill text-primary mb-4"></i>
+                            <h6 class="mb-3">Budget Stays</h6>
+                            <p class="mb-0">78 Options</p>
                         </a>
                     </div>
+                    <!-- Family-Friendly Stays -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-                            <h6 class="mb-3">Human Resource</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-users text-primary mb-4"></i>
+                            <h6 class="mb-3">Family-Friendly Stays</h6>
+                            <p class="mb-0">65 Options</p>
                         </a>
                     </div>
+                    <!-- Romantic Getaways -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
-                            <h6 class="mb-3">Project Management</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-heart text-primary mb-4"></i>
+                            <h6 class="mb-3">Romantic Getaways</h6>
+                            <p class="mb-0">50 Options</p>
                         </a>
                     </div>
+                    <!-- Pet-Friendly Stays -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
-                            <h6 class="mb-3">Business Development</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-paw text-primary mb-4"></i>
+                            <h6 class="mb-3">Pet-Friendly Stays</h6>
+                            <p class="mb-0">30 Options</p>
                         </a>
                     </div>
+                    <!-- Adventure Stays -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
-                            <h6 class="mb-3">Sales & Communication</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-mountain text-primary mb-4"></i>
+                            <h6 class="mb-3">Adventure Stays</h6>
+                            <p class="mb-0">40 Options</p>
                         </a>
                     </div>
+                    <!-- Beachfront Properties -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
-                            <h6 class="mb-3">Teaching & Education</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-umbrella-beach text-primary mb-4"></i>
+                            <h6 class="mb-3">Beachfront Properties</h6>
+                            <p class="mb-0">55 Options</p>
                         </a>
                     </div>
+                    <!-- Unique Stays -->
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                         <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
-                            <h6 class="mb-3">Design & Creative</h6>
-                            <p class="mb-0">123 Vacancy</p>
+                            <i class="fa fa-3x fa-tree text-primary mb-4"></i>
+                            <h6 class="mb-3">Unique Stays</h6>
+                            <p class="mb-0">20 Options</p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        
         <!-- Category End -->
 
         <!-- Footer Start -->
