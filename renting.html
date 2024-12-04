@@ -68,8 +68,98 @@
         <!-- Navbar End -->
 
         
-        <!--Fill it here chat gpt-->
-
+                <!-- Renting Form Start -->
+                <div class="container my-5">
+                    <h2 class="text-center mb-4">List Your Place for Renting</h2>
+                    <form id="rentingForm">
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter location" required>
+                        </div>
+        
+                        <!-- Renting Space -->
+                        <div class="mb-3">
+                            <label for="spaceType" class="form-label">Renting Space</label>
+                            <select class="form-select" id="spaceType" required>
+                                <option value="Entire Place">Entire Place</option>
+                                <option value="A Room">A Room</option>
+                                <option value="A Shared Room">A Shared Room</option>
+                            </select>
+                        </div>
+        
+                        <!-- Rooms -->
+                        <div class="mb-3">
+                            <label class="form-label">Number of Rooms</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="guestrooms" placeholder="Guestrooms" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="bedrooms" placeholder="Bedrooms" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="beds" placeholder="Beds" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" id="bathrooms" placeholder="Bathrooms" min="0" required>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- Amenities -->
+                        <div class="mb-3">
+                            <label class="form-label">Place Amenities</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="wifi" value="Wifi"> Wifi<br>
+                                    <input type="checkbox" id="tv" value="TV"> TV<br>
+                                    <input type="checkbox" id="kitchen" value="Kitchen"> Kitchen<br>
+                                    <input type="checkbox" id="washer" value="Washer"> Washer<br>
+                                    <input type="checkbox" id="freeParking" value="Free parking on premises"> Free Parking<br>
+                                    <input type="checkbox" id="paidParking" value="Paid parking on premises"> Paid Parking<br>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="airConditioning" value="Air conditioning"> Air Conditioning<br>
+                                    <input type="checkbox" id="workspace" value="Dedicated workspace"> Dedicated Workspace<br>
+                                    <input type="checkbox" id="pool" value="Pool"> Pool<br>
+                                    <input type="checkbox" id="hotTub" value="Hot tub"> Hot Tub<br>
+                                    <input type="checkbox" id="patio" value="Patio"> Patio<br>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="firePit" value="Fire pit"> Fire Pit<br>
+                                    <input type="checkbox" id="exerciseEquipment" value="Exercise equipment"> Exercise Equipment<br>
+                                    <input type="checkbox" id="lakeAccess" value="Lake access"> Lake Access<br>
+                                    <input type="checkbox" id="beachAccess" value="Beach access"> Beach Access<br>
+                                    <input type="checkbox" id="smokeAlarm" value="Smoke alarm"> Smoke Alarm<br>
+                                    <input type="checkbox" id="fireExtinguisher" value="Fire extinguisher"> Fire Extinguisher<br>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- Pictures -->
+                        <div class="mb-3">
+                            <label class="form-label">Pictures of the Property (minimal 3 iamges)</label>
+                            <input type="file" id="propertyPictures" class="form-control" multiple accept="image/*" required>
+                        </div>
+        
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title of the Property</label>
+                            <input type="text" class="form-control" id="title" placeholder="Enter title" required>
+                        </div>
+        
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description of the Property</label>
+                            <textarea class="form-control" id="description" rows="4" placeholder="Enter description" required></textarea>
+                        </div>
+        
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <!-- Renting Form End -->
 
 
         <!-- Footer Start -->
@@ -100,16 +190,14 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="js/renting.js"></script>
+    
 </body>
 
 </html>
