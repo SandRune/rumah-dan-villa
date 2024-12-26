@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{title}}</title>
+    <title>1</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon!!! -->
@@ -28,7 +28,7 @@
     <link href="css/style.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>1</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
 </head>
@@ -36,6 +36,13 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start 
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+         Spinner End -->
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
             <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
@@ -48,6 +55,13 @@
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
                     <a href="stays.html" class="nav-item nav-link">Stays</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Rent</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="pages/job-list.html" class="dropdown-item">Job List</a>
+                            <a href="pages/job-detail.html" class="dropdown-item">Job Detail</a>
+                        </div>
+                    </div>
                     <a href="signup.html" class="nav-item nav-link">Signup</a>
                     <a href="login.html" class="nav-item nav-link">Login</a>
                 </div>
@@ -56,20 +70,20 @@
         </nav>
         <!-- Navbar End -->
 
-        <div class="container">
-            <h1>{{title}}</h1>
-            <p><strong>Location:</strong> {{location}}</p>
-            <p><strong>Description:</strong> {{description}}</p>
-            <p><strong>Price per night:</strong> {{price}}</p>
-            <p><strong>Property Type:</strong> {{propertyType}}</p>
-            <p><strong>Guestrooms:</strong> {{guestrooms}}</p>
-            <p><strong>Bedrooms:</strong> {{bedrooms}}</p>
-            <p><strong>Beds:</strong> {{beds}}</p>
-            <p><strong>Bathrooms:</strong> {{bathrooms}}</p>
-            <img src="{{images}}" alt="{{title}}" style="width:100%; max-width:600px;">
-            <div class="map">
-                {{mapIframe}}
-            </div>
-        </div> 
+    <div class="container">
+        <h1>1</h1>
+        <p><strong>Location:</strong> 1</p>
+        <p><strong>Description:</strong> 1</p>
+        <p><strong>Price per night:</strong> 12.121.212</p>
+        <p><strong>Property Type:</strong> A Room</p>
+        <p><strong>Amenities:</strong> TV</p>
+        <p><strong>Guestrooms:</strong> 1, <strong>Bedrooms:</strong> 1, <strong>Beds:</strong> 1, <strong>Bathrooms:</strong> 1</p>
+        <img src="uploads/676d9f2c944a9_Screenshot 2024-12-04 125555.png" alt="1" style="width:100%; max-width:600px;">
+        <div class="mb-3">
+            <h4>Map Location</h4>
+            {{mapIframe}}
+        </div>
+        
+    </div>  
 </body>
 </html>
