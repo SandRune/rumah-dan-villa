@@ -59,17 +59,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="index.html" class="nav-item nav-link">Home</a>
                     <a href="stays.html" class="nav-item nav-link">Stays</a>
                     <a href="signup.html" class="nav-item nav-link">Signup</a>
                     <a href="login.html" class="nav-item nav-link">Login</a>
                 </div>
-                <a href="renting.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="renting.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block active">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </nav>
         <!-- Navbar End -->
 
         <div class="container">
+            
             <div class="form-container">
                 <h2 class="form-header">List Your Property for Renting</h2>
                 <form id="rentingForm" action="renting_submit.php" method="POST" enctype="multipart/form-data">
@@ -79,11 +80,11 @@
                         <input type="text" class="form-control" id="location" name="location" placeholder="Enter the location" required>
                     </div>
 
-                    <!-- Title -->
                     <div class="mb-3">
                         <label for="title" class="form-label">Property Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title of the property" required>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title of the property" maxlength="25" required>
                     </div>
+                
 
                     <!-- Description -->
                     <div class="mb-3">
@@ -199,24 +200,39 @@
                         </div>
                     </div>
 
-                    <!-- Upload Images -->
+                    <!-- Google Map -->
                     <div class="mb-3">
-                        <label for="propertyPictures" class="form-label">Upload Images (at least 1)</label>
-                        <input type="file" class="form-control" id="propertyPictures" name="propertyPictures[]" accept="image/*" multiple required>
+                        <label for="mapIframe" class="form-label">Google Maps Embed (Iframe)</label>
+                        <textarea class="form-control" id="mapIframe" name="mapIframe" rows="5" placeholder='Paste iframe here' required></textarea>
                     </div>
+                    
 
-                    <!--Google Maps-->
+                    <!-- Images -->
                     <div class="mb-3">
-                        <label for="mapIframe" class="form-label">Map Embed (Full iframe HTML)</label>
-                        <textarea class="form-control" id="mapIframe" name="mapIframe" rows="5" placeholder='<iframe src="..."></iframe>' required></textarea>
-                        <small class="form-text text-muted">Paste the full Google Maps iframe HTML here.</small>
+                        <label for="propertyPictures" class="form-label">Upload Images</label>
+                        <input type="file" class="form-control" id="propertyPictures" name="propertyPictures[]" multiple accept="image/*" required>
                     </div>
+                    
 
                     <!-- Submit Button -->
                     <button style="background-color: #28a745; color: #ffffff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
                         Rent
                     </button>
                     
+
+                    <!-- Validasi Input Iframe -->
+                    <script>
+                        const mapInput = document.getElementById("mapIframe");
+
+                        mapInput.addEventListener("input", function (e) {
+                            const value = e.target.value.trim(); // Hapus spasi di awal/akhir
+                            if (!value.startsWith("<iframe")) {
+                                alert("Please provide a valid iframe for Google Maps.");
+                                e.target.value = ""; // Reset input jika invalid
+                            }
+                        });
+                        
+                    </script>
                 </form>
             </div>
         </div> 

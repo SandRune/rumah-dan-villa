@@ -8,6 +8,7 @@ $user = "root";
 $pass = "";
 $db = "rumahdanvilla";
 
+// Koneksi ke database
 $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
@@ -15,6 +16,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Ambil data dari formulir
     $location = $conn->real_escape_string($_POST["location"]);
     $title = $conn->real_escape_string($_POST["title"]);
     $description = $conn->real_escape_string($_POST["description"]);
@@ -24,18 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bedrooms = intval($_POST["bedrooms"]);
     $beds = intval($_POST["beds"]);
     $bathrooms = intval($_POST["bathrooms"]);
-    $amenities = isset($_POST["amenities"]) ? implode(", ", $_POST["amenities"]) : "No amenities listed";
-    $mapIframe = $_POST["mapIframe"]; // Jangan gunakan htmlspecialchars di sini
+    $amenities = isset($_POST["amenities"]) ? implode(", ", $_POST["amenities"]) : "";
+    $mapIframe = $conn->real_escape_string($_POST["mapIframe"]);
 
-    // Validasi iframe
-    if (strpos($mapIframe, "<iframe") === false || strpos($mapIframe, "</iframe>") === false) {
-        die("Invalid iframe input.");
-    }
-
+    // Proses upload file gambar
     $imageURLs = [];
     $uploadDir = "uploads/";
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+        mkdir($uploadDir, 0777, true); // Buat folder jika belum ada
     }
 
     if (!empty($_FILES["propertyPictures"]["name"][0])) {
@@ -52,12 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $images = implode(", ", $imageURLs);
-    $firstImage = explode(", ", $images)[0];
 
+    // Simpan data ke database
     $sql = "INSERT INTO properties (location, title, description, price, propertyType, guestrooms, bedrooms, beds, bathrooms, amenities, images, map_location)
             VALUES ('$location', '$title', '$description', '$price', '$propertyType', '$guestrooms', '$bedrooms', '$beds', '$bathrooms', '$amenities', '$images', '$mapIframe')";
 
     if ($conn->query($sql) === TRUE) {
+        // Buat halaman reservasi baru
         $templateFile = "renting_template.html";
         if (!file_exists($templateFile)) {
             die("Template file $templateFile tidak ditemukan!");
@@ -65,24 +64,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $template = file_get_contents($templateFile);
 
+        // Ganti placeholder di template dengan data properti
         $template = str_replace("{{title}}", $title, $template);
         $template = str_replace("{{location}}", $location, $template);
         $template = str_replace("{{description}}", $description, $template);
         $template = str_replace("{{price}}", number_format($price, 0, ",", "."), $template);
         $template = str_replace("{{propertyType}}", $propertyType, $template);
+        $template = str_replace("{{amenities}}", $amenities, $template);
         $template = str_replace("{{guestrooms}}", $guestrooms, $template);
         $template = str_replace("{{bedrooms}}", $bedrooms, $template);
         $template = str_replace("{{beds}}", $beds, $template);
         $template = str_replace("{{bathrooms}}", $bathrooms, $template);
-        $template = str_replace("{{amenities}}", $amenities, $template);
-        $template = str_replace("{{mapIframe}}", $mapIframe, $template); // Jangan encode lagi di sini
-        $template = str_replace("{{images}}", $firstImage, $template);
+        $template = str_replace("{{images}}", explode(", ", $images)[0], $template); // Gunakan gambar pertama
+        $template = str_replace("{{mapIframe}}", $mapIframe, $template);
 
         $newPageName = "reservation-" . uniqid() . ".html";
-        if (!file_put_contents($newPageName, $template)) {
-            die("Gagal membuat halaman reservasi baru.");
+        file_put_contents($newPageName, $template);
+
+        // Tambahkan properti baru ke stays.html
+        $staysFile = "stays.html";
+        $newGalleryItem = "
+            <div class='gallery-item'>
+                <a href='$newPageName'>
+                    <img src='" . explode(", ", $images)[0] . "' alt='$title'>
+                    <div class='gallery-text'>
+                        <div class='hotel-info'>
+                            <span class='hotel-name'>$title</span>
+                            <span class='hotel-rating'>⭐5.0</span>
+                        </div>
+                        <p>$description</p>
+                    </div>
+                </a>
+            </div>
+        ";
+
+        // Sisipkan galeri baru di stays.html
+        if (file_exists($staysFile)) {
+            $staysContent = file_get_contents($staysFile);
+            $staysContent = str_replace("<!-- NEW_PROPERTIES_HERE -->", $newGalleryItem . "\n<!-- NEW_PROPERTIES_HERE -->", $staysContent);
+            file_put_contents($staysFile, $staysContent);
         }
 
+        // Redirect ke halaman reservasi baru
         header("Location: $newPageName");
         exit();
     } else {
