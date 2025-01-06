@@ -5,6 +5,10 @@ $user = "root";
 $pass = "";
 $db = "rumahdanvilla";
 
+// Set zona waktu ke Jakarta (WIB)
+date_default_timezone_set("Asia/Jakarta");
+
+
 $conn = new mysqli($host, $user, $pass, $db);
 
 // Check connection

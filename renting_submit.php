@@ -14,6 +14,11 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+// Set zona waktu ke Jakarta (WIB)
+date_default_timezone_set("Asia/Jakarta");
+
+
+
 // Konfigurasi database
 $host = "localhost";
 $user = "root";
