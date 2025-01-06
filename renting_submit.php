@@ -2,6 +2,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+session_start();
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['user_id'])) {
+    header("Content-Type: application/json");
+    echo json_encode([
+        "success" => false,
+        "message" => "Access denied. Please log in first."
+    ]);
+    exit();
+}
+
 // Konfigurasi database
 $host = "localhost";
 $user = "root";
@@ -12,6 +24,15 @@ $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
+}
+
+session_start();
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['user_id'])) {
+    // Jika belum login, redirect ke halaman login
+    header("Location: login.html");
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['user_id'])) {
+    // Jika belum login, redirect ke login page
+    header("Location: login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,11 +71,12 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="stays.html" class="nav-item nav-link">Stays</a>
-                    <a href="signup.html" class="nav-item nav-link">Signup</a>
-                    <a href="login.html" class="nav-item nav-link">Login</a>
+                    <a href="stays.php" class="nav-item nav-link">Stays</a>
+                        <a href="logout.php" class="nav-item nav-link">Logout</a>
+                        <a href="signup.html" class="nav-item nav-link">Signup</a>
+                        <a href="login.html" class="nav-item nav-link">Login</a>
                 </div>
-                <a href="renting.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block active">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="renting.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </nav>
         <!-- Navbar End -->
