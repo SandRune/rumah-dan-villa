@@ -1,7 +1,11 @@
+<?php
+session_start(); // Wajib ada sebelum memproses sesi
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Favicon -->
+    <!-- Favicon -->    
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -78,7 +82,7 @@
             justify-content: center; /* Teks di tengah horizontal */
             align-items: center; /* Teks di tengah vertikal */
             width: 100px; /* Lebar tombol lebih kecil */
-            height: 35px; /* Tinggi tombol lebih kecil */
+            height: 75px; /* Tinggi tombol lebih kecil */
             font-size: 12px; /* Ukuran teks lebih kecil */
             font-weight: bold;
             border-radius: 5px;
@@ -108,25 +112,29 @@
                             Profile
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- Jika belum login -->
-                            <div id="not-logged-in">
-                                <p class="dropdown-item text-center">Please Login or Register First to proceed!</p>
-                                <div class="d-flex justify-content-around">
-                                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
-                                    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <!-- Jika sudah login -->
+                                <div id="logged-in">
+                                    <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
+                                    <div class="d-flex justify-content-around">
+                                        <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
+                                        <form id="logoutForm" method="POST" action="logout.php" style="display: inline;">
+                                            <button type="submit" class="btn btn-primary btn-sm">Logout</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            
-            
-                            <!-- Jika sudah login -->
-                            <div id="logged-in">
-                                <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
-                                <div class="d-flex justify-content-around">
-                                    <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
-                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                            <?php else: ?>
+                                <!-- Jika belum login -->
+                                <div id="not-logged-in">
+                                    <p class="dropdown-item text-center">Please Login or Register First to proceed!</p>
+                                    <div class="d-flex justify-content-around">
+                                        <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+                                        <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
+
                     </div>
                 </div>
                 <a href="renting.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
@@ -143,7 +151,6 @@
                     <div class="gallery-text">
                         <div class="hotel-info">
                             <span class="hotel-name">Villa Dingin</span>
-                            <span class="hotel-rating">⭐5.0</span>
                         </div>
                         <p>Beneran dingin soalnya kamu tidur di exterior-nya</p>
                     </div>
@@ -151,45 +158,49 @@
             </div>
 
             <?php
-            // Database connection
-            $host = "localhost";
-            $user = "root";
-            $pass = "";
-            $db = "rumahdanvilla";
+                // Database connection
+                $host = "localhost";
+                $user = "root";
+                $pass = "";
+                $db = "rumahdanvilla";
 
-            $conn = new mysqli($host, $user, $pass, $db);
+                $conn = new mysqli($host, $user, $pass, $db);
 
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // Query to fetch properties
-            $sql = "SELECT * FROM properties";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "
-                    <div class='gallery-item'>
-                        <a href='property_details.php?id=".$row['id']."'>
-                            <img src='".$row['images']."' alt='".$row['title']."'>
-                            <div class='gallery-text'>
-                                <div class='hotel-info'>
-                                    <span class='hotel-name'>".$row['title']."</span>
-                                    <span class='hotel-rating'>⭐5.0</span>
-                                </div>
-                                <p>".$row['description']."</p>
-                            </div>
-                        </a>
-                    </div>";
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
                 }
-            } else {
-                echo "No properties found.";
-            }
 
-            $conn->close();
-            ?>
+                // Query to fetch properties
+                $sql = "SELECT * FROM properties";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Ambil 10 kata pertama dari deskripsi
+                        $description_words = explode(' ', $row['description']);
+                        $short_description = implode(' ', array_slice($description_words, 0, 10)) . '...';
+
+                        echo "
+                        <div class='gallery-item'>
+                            <a href='property_details.php?id=" . $row['id'] . "'>
+                                <img src='" . $row['images'] . "' alt='" . $row['title'] . "'>
+                                <div class='gallery-text'>
+                                    <div class='hotel-info'>
+                                        <span class='hotel-name'>" . $row['title'] . "</span>
+                                    </div>
+                                    <p>" . $short_description . "</p>
+                                </div>
+                            </a>
+                        </div>";
+                    }
+                } else {
+                    echo "No properties found.";
+                }
+
+                $conn->close();
+                ?>
+
         </div>
         <!-- Galeri Properti End -->
 

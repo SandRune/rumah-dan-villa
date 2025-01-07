@@ -1,18 +1,25 @@
+<?php
+session_start(); // Wajib ada sebelum memproses sesi
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title><?php echo $title; ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <link href="img/favicon.ico" rel="icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-    <!-- Favicon -->
+    <!-- Favicon!!! -->
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
-
+    
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -21,69 +28,57 @@
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Stylesheet -->
+    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
     <style>
-
-        .login-container {
-            max-width: 400px;
-            width: 100%;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        .login-container h2 {
-            text-align: center;
+        .property-title {
+            font-size: 2rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
-
-        .login-container label {
-            font-weight: 500;
-            color: #333;
+        .image-section img {
+            width: 727px;
+            max-height: 727px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
-
-        .login-container input {
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .details-table {
             width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .details-table th, .details-table td {
+            border: 1px solid;
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            text-align: left;
         }
-
-        .login-container input:focus {
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-            outline: none;
+        .details-table th {
+            font-weight: bold;
         }
-
-        .login-container button {
+        .google-map iframe {
             width: 100%;
-            padding: 10px;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+            height: 450px;
+            border: 0;
+            border-radius: 8px;
         }
-
-        .login-container .link {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .login-container .link a {
-            text-decoration: none;
-        }
-
-        .login-container .link a:hover {
-            text-decoration: underline;
-        }
-
         .dropdown-menu .btn {
             display: inline-flex;
             justify-content: center; /* Teks di tengah horizontal */
@@ -100,7 +95,6 @@
     </style>
 </head>
 <body>
-
     <div class="container-xxl bg-white p-0">
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
@@ -128,6 +122,16 @@
                                     <a href="login.html" class="btn btn-primary btn-sm">Login</a>
                                 </div>
                             </div>
+                            
+            
+                            <!-- Jika sudah login -->
+                            <div id="logged-in">
+                                <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
+                                <div class="d-flex justify-content-around">
+                                    <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
+                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,53 +141,58 @@
         </nav>
         <!-- Navbar End -->
 
-        <div class="login-container">
-            <h2>Login</h2>
-            <form id="login-form" action="login.php" method="POST">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            
-                <button type="submit">Login</button>
-            </form>
-            
-            <div class="link">
-                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        <!-- Property Details Section -->
+        <div class="container">
+            <h1 class="property-title"><?php echo $title; ?></h1>
+            <div class="image-section">
+                <img src="<?php echo $images; ?>" alt="<?php echo $title; ?>">
+            </div>
+            <div class="info-section">
+                <p><strong>Location:</strong> <?php echo $location; ?></p>
+            </div>
+            <p><strong>Price per night:</strong> <?php echo $price; ?></p>
+            <p><?php echo $description; ?></p>
+            <table class="details-table">
+                <tr>
+                    <th>Property Type</th>
+                    <td><?php echo $propertyType; ?></td>
+                </tr>
+                <tr>
+                    <th>Guestrooms</th>
+                    <td><?php echo $guestrooms; ?></td>
+                </tr>
+                <tr>
+                    <th>Bedrooms</th>
+                    <td><?php echo $bedrooms; ?></td>
+                </tr>
+                <tr>
+                    <th>Beds</th>
+                    <td><?php echo $beds; ?></td>
+                </tr>
+                <tr>
+                    <th>Bathrooms</th>
+                    <td><?php echo $bathrooms; ?></td>
+                </tr>
+            </table>
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <p><?php echo $amenities; ?></p>
+            </div>
+            <div class="google-map">
+                <h3>Map Location</h3>
+                <?php echo $map_location; ?>
+            </div>
+
+            <!-- Tombol Reserve -->
+            <div style="margin-top: 30px; text-align: center;">
+                <a href="reserve.php?id=<?php echo $id; ?>" 
+                class="btn btn-primary" 
+                style="font-size: 20px; padding: 15px 30px; border-radius: 5px; text-transform: uppercase; display: inline-block;">
+                    Reserve Now
+                </a>
             </div>
         </div>
-
-        <script>
-            document.getElementById("login-form").addEventListener("submit", async function(event) {
-                event.preventDefault();
-        
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
-        
-                try {
-                    const response = await fetch("login.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        body: new URLSearchParams({ email, password })
-                    });
-        
-                    const result = await response.json();
-                    if (result.success) {
-                        alert(result.message);
-                        window.location.href = "index.php";
-                    } else {
-                        alert(result.message); // Menampilkan pesan dari login.php
-                    }
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
-                }
-            });
-        </script>
-        
-        
+        <!-- Property Details Section End -->
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -231,11 +240,9 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
+                            &copy; <a class="border-bottom" href="#">HouseingnVilla</a>, All Right Reserved. 
+						</div>
+
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="">Home</a>
@@ -251,6 +258,19 @@
         <!-- Footer End -->
 
 
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
 </body>
 </html>

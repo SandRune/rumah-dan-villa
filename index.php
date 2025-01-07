@@ -8,7 +8,7 @@ session_start(); // Wajib ada sebelum memproses sesi
 
 <head>
     <meta charset="utf-8">
-    <title>Rumah & Villa</title>
+    <title>Housing n' Villas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -90,7 +90,7 @@ session_start(); // Wajib ada sebelum memproses sesi
                                 <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
                                 <div class="d-flex justify-content-around">
                                     <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
-                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                                    <a href="logout.php" class="btn btn-primary btn-sm">Logout</a>
                                 </div>
                             </div>
                         </div>

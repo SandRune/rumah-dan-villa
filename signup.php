@@ -1,5 +1,9 @@
 <?php
-header('Content-Type: application/json'); // Ensure JSON response
+header('Content-Type: application/json'); // Set header untuk JSON response
+
+// Aktifkan error reporting untuk debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Database credentials
 $servername = "localhost";
@@ -22,13 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
 
-        $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+        $sql = "INSERT INTO users (email, password) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $email, $password);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             echo json_encode(["success" => true, "message" => "Signup successful!"]);
         } else {
-            echo json_encode(["success" => false, "message" => "Signup failed: " . $conn->error]);
+            echo json_encode(["success" => false, "message" => "Signup failed: " . $stmt->error]);
         }
+
+        $stmt->close();
     } else {
         echo json_encode(["success" => false, "message" => "Invalid form data!"]);
     }

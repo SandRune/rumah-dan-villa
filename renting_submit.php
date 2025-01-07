@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$location', '$title', '$description', '$price', '$propertyType', '$guestrooms', '$bedrooms', '$beds', '$bathrooms', '$amenities', '$images', '$mapIframe')";
 
     if ($conn->query($sql) === TRUE) {
-        $templateFile = "renting_template.html";
+        $templateFile = "renting_template.php";
         if (!file_exists($templateFile)) {
             die("Template file $templateFile tidak ditemukan!");
         }

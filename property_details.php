@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
     $map_location = isset($row['map_location']) ? $row['map_location'] : '<p>Map not available</p>'; // Menggunakan kolom map_location
 
     // Include template
-    include 'renting_template.html';
+    include 'renting_template.php';
 } else {
     echo "<p>Property not found.</p>";
 }

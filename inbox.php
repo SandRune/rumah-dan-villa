@@ -1,11 +1,13 @@
 <?php
-// Pastikan user sudah login
+session_start(); // Pastikan sesi dimulai
+
+// Periksa apakah user sudah login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit;
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id']; // Ambil user_id dari sesi
 
 // Koneksi ke database
 $conn = new mysqli("localhost", "root", "", "rumahdanvilla");
@@ -13,9 +15,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Ambil pesan dari inbox
-$sql = "SELECT * FROM inbox WHERE user_id = $user_id ORDER BY created_at DESC";
-$result = $conn->query($sql);
+// Ambil pesan dari tabel messages
+$sql = "SELECT * FROM messages WHERE user_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $messages = [];
 if ($result->num_rows > 0) {
@@ -24,8 +29,10 @@ if ($result->num_rows > 0) {
     }
 }
 
+$stmt->close();
 $conn->close();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -92,22 +99,12 @@ $conn->close();
                             Profile
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- Jika belum login -->
-                            <div id="not-logged-in">
-                                <p class="dropdown-item text-center">Please Login or Register First to proceed!</p>
-                                <div class="d-flex justify-content-around">
-                                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
-                                    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
-                                </div>
-                            </div>
-                            
-            
                             <!-- Jika sudah login -->
                             <div id="logged-in">
                                 <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
                                 <div class="d-flex justify-content-around">
                                     <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
-                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                                    <a href="logout.php" class="btn btn-primary btn-sm">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -119,14 +116,14 @@ $conn->close();
         </nav>
         <!-- Navbar End -->
 
-        <div class="container mt-5">
+        <div class="container py-5">
             <h2>Inbox Messages</h2>
             <?php if (!empty($messages)): ?>
                 <ul class="list-group">
                     <?php foreach ($messages as $message): ?>
                         <li class="list-group-item">
-                            <p><?php echo $message['message']; ?></p>
-                            <small class="text-muted">Sent on: <?php echo $message['created_at']; ?></small>
+                            <p><?php echo htmlspecialchars($message['message']); ?></p>
+                            <small class="text-muted">Sent on: <?php echo htmlspecialchars($message['created_at']); ?></small>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -134,6 +131,7 @@ $conn->close();
                 <p>No messages yet.</p>
             <?php endif; ?>
         </div>
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
