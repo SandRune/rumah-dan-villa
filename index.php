@@ -1,3 +1,8 @@
+<?php
+session_start(); // Wajib ada sebelum memproses sesi
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,13 +34,32 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .dropdown-menu .btn {
+            display: inline-flex;
+            justify-content: center; /* Teks di tengah horizontal */
+            align-items: center; /* Teks di tengah vertikal */
+            width: 100px; /* Lebar tombol lebih kecil */
+            height: 35px; /* Tinggi tombol lebih kecil */
+            font-size: 12px; /* Ukuran teks lebih kecil */
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 5px; /* Jarak antar tombol */
+            padding: 0; /* Menghapus padding default */
+            text-align: center; /* Tambahan keamanan */
+        }
+    </style>
+
+
+
 </head>
 
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-            <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <a href="index.php" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                 <h1 class="m-0 text-primary">Housing n' Villas</h1>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -43,14 +67,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
                     <a href="stays.php" class="nav-item nav-link">Stays</a>
-                        <a href="logout.php" class="nav-item nav-link">Logout</a>
-                        <a href="signup.html" class="nav-item nav-link">Signup</a>
-                        <a href="login.php" class="nav-item nav-link">Login</a>
+                    <a href="inbox.php" class="nav-item nav-link">Inbox</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- Jika belum login -->
+                            <div id="not-logged-in">
+                                <p class="dropdown-item text-center">Please Login or Register First to proceed!</p>
+                                <div class="d-flex justify-content-around">
+                                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+                                    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+                                </div>
+                            </div>
+                            
+            
+                            <!-- Jika sudah login -->
+                            <div id="logged-in">
+                                <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
+                                <div class="d-flex justify-content-around">
+                                    <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
+                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <a href="renting.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
+            
         </nav>
         <!-- Navbar End -->
 
@@ -78,12 +126,12 @@
                                 <div class="col-10 col-lg-8">
                                     <h1 class="display-3 text-white animated slideInDown mb-4">Fine Villa Exterior.</h1>
                                     <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Villa</a>                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Carousel End -->
 
         <!-- Search Start -->
@@ -132,82 +180,6 @@
             </div>
         </div>
         <!-- Search End -->
-
-        
-
-        <!-- Category Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
-                <div class="row g-4">
-                    <!-- Luxury Villas -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-house-user text-primary mb-4"></i>
-                            <h6 class="mb-3">Luxury Villas</h6>
-                            <p class="mb-0">45 Options</p>
-                        </a>
-                    </div>
-                    <!-- Budget Stays -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-money-bill text-primary mb-4"></i>
-                            <h6 class="mb-3">Budget Stays</h6>
-                            <p class="mb-0">78 Options</p>
-                        </a>
-                    </div>
-                    <!-- Family-Friendly Stays -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-users text-primary mb-4"></i>
-                            <h6 class="mb-3">Family-Friendly Stays</h6>
-                            <p class="mb-0">65 Options</p>
-                        </a>
-                    </div>
-                    <!-- Romantic Getaways -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-heart text-primary mb-4"></i>
-                            <h6 class="mb-3">Romantic Getaways</h6>
-                            <p class="mb-0">50 Options</p>
-                        </a>
-                    </div>
-                    <!-- Pet-Friendly Stays -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-paw text-primary mb-4"></i>
-                            <h6 class="mb-3">Pet-Friendly Stays</h6>
-                            <p class="mb-0">30 Options</p>
-                        </a>
-                    </div>
-                    <!-- Adventure Stays -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-mountain text-primary mb-4"></i>
-                            <h6 class="mb-3">Adventure Stays</h6>
-                            <p class="mb-0">40 Options</p>
-                        </a>
-                    </div>
-                    <!-- Beachfront Properties -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-umbrella-beach text-primary mb-4"></i>
-                            <h6 class="mb-3">Beachfront Properties</h6>
-                            <p class="mb-0">55 Options</p>
-                        </a>
-                    </div>
-                    <!-- Unique Stays -->
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <a class="cat-item rounded p-4" href="">
-                            <i class="fa fa-3x fa-tree text-primary mb-4"></i>
-                            <h6 class="mb-3">Unique Stays</h6>
-                            <p class="mb-0">20 Options</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Category End -->
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -287,6 +259,22 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Periksa apakah user sudah login melalui PHP session
+            <?php if (isset($_SESSION['user_id'])): ?>
+                // Jika login, sembunyikan not-logged-in dan tampilkan logged-in
+                document.getElementById('not-logged-in').style.display = "none";
+                document.getElementById('logged-in').style.display = "block";
+            <?php else: ?>
+                // Jika belum login, sembunyikan logged-in dan tampilkan not-logged-in
+                document.getElementById('not-logged-in').style.display = "block";
+                document.getElementById('logged-in').style.display = "none";
+            <?php endif; ?>
+        });
+    </script>
+    
 </body>
 
 </html>

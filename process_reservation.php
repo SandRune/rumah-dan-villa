@@ -169,13 +169,26 @@ $conn->close();
             margin: 20px 0;
             font-family: monospace;
         }
+        .dropdown-menu .btn {
+            display: inline-flex;
+            justify-content: center; /* Teks di tengah horizontal */
+            align-items: center; /* Teks di tengah vertikal */
+            width: 100px; /* Lebar tombol lebih kecil */
+            height: 35px; /* Tinggi tombol lebih kecil */
+            font-size: 12px; /* Ukuran teks lebih kecil */
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 5px; /* Jarak antar tombol */
+            padding: 0; /* Menghapus padding default */
+            text-align: center; /* Tambahan keamanan */
+        }
     </style>
 </head>
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-            <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <a href="index.php" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                 <h1 class="m-0 text-primary">Housing n' Villas</h1>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -183,14 +196,38 @@ $conn->close();
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="stays.php" class="nav-item nav-link active">Stays</a>
-                    <a href="logout.php" class="nav-item nav-link">Logout</a>
-                    <a href="signup.html" class="nav-item nav-link">Signup</a>
-                    <a href="login.php" class="nav-item nav-link">Login</a>
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="stays.php" class="nav-item nav-link">Stays</a>
+                    <a href="inbox.php" class="nav-item nav-link">Inbox</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- Jika belum login -->
+                            <div id="not-logged-in">
+                                <p class="dropdown-item text-center">Please Login or Register First to proceed!</p>
+                                <div class="d-flex justify-content-around">
+                                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+                                    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+                                </div>
+                            </div>
+                            
+            
+                            <!-- Jika sudah login -->
+                            <div id="logged-in">
+                                <p class="dropdown-item text-center">Welcome, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
+                                <div class="d-flex justify-content-around">
+                                    <a href="update_profile.php" class="btn btn-primary btn-sm">Update Profile</a>
+                                    <a action="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <a href="renting.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Try Renting<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
+            
         </nav>
         <!-- Navbar End -->
 
